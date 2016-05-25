@@ -2179,13 +2179,13 @@ std::string t_js_generator::ts_function_signature(t_function* tfunction, bool in
   for (f_iter = fields.begin(); f_iter != fields.end(); ++f_iter) {
     str += (*f_iter)->get_name() + ts_get_req(*f_iter) + ": " + ts_get_type((*f_iter)->get_type());
     
-    if (f_iter + 1 != fields.end()) {
+    if (f_iter + 1 != fields.end() || (include_callback && fields.size() > 0)) {
       str += ", ";
     }
   }
 
   if (include_callback) {
-    str += ", callback: Function): ";
+    str += "callback: Function): ";
 
     if (gen_jquery_) {
       str += "JQueryXHR;";
